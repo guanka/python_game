@@ -1,4 +1,5 @@
 import pygame
+import random
 
 
 class Enemy(pygame.sprite.Sprite):
@@ -13,3 +14,15 @@ class Enemy(pygame.sprite.Sprite):
 
     def move(self):
         self.rect.top += self.speed
+
+
+class EnemyGroup:
+
+    def __init__(self):
+        self.group = pygame.sprite.Group()
+
+    def generate_enemy(self, env):
+        y_axis = env.pos[0] - env.enemy1_rect.width
+        enemy1_pos = [random.randint(0, y_axis), 0]
+        enemy1 = Enemy(env.enemy1_img, env.enemy1_down_imgs, enemy1_pos)
+        self.group.add(enemy1)
